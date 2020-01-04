@@ -131,39 +131,64 @@ func (e *ExpressionStatement) String() string {
 func (e *ExpressionStatement) statementNode() {}
 
 type IntegerLiteral struct {
-  Token token.Token
-  Value int64
+	Token token.Token
+	Value int64
 }
 
 func (i *IntegerLiteral) TokenLiteral() string {
-  return i.Token.Literal
+	return i.Token.Literal
 }
 
 func (i *IntegerLiteral) String() string {
-  return i.Token.Literal
+	return i.Token.Literal
 }
 
 func (i *IntegerLiteral) expressionNode() {}
 
 type PrefixExpression struct {
-  Token token.Token // The prefix token, e.g.. !
+	Token    token.Token // The prefix token, e.g.. !
+	Operator string
+	Right    Expression
+}
+
+func (p *PrefixExpression) TokenLiteral() string {
+	return p.Token.Literal
+}
+
+func (p *PrefixExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("(")
+	out.WriteString(p.Operator)
+	out.WriteString(p.Right.String())
+	out.WriteString(")")
+
+	return out.String()
+}
+
+func (p *PrefixExpression) expressionNode() {}
+
+type InfixExpression struct {
+  Token token.Token // The operator token, e.g., +
+  Left Expression
   Operator string
   Right Expression
 }
 
-func (p *PrefixExpression) TokenLiteral() string {
-  return p.Token.Literal
+func (i *InfixExpression) TokenLiteral() string {
+  return i.Token.Literal
 }
 
-func (p *PrefixExpression) String() string {
+func (i *InfixExpression) String() string {
   var out bytes.Buffer
 
   out.WriteString("(")
-  out.WriteString(p.Operator)
-  out.WriteString(p.Right.String())
+  out.WriteString(i.Left.String())
+  out.WriteString(" " + i.Operator + " ")
+  out.WriteString(i.Right.String())
   out.WriteString(")")
 
   return out.String()
 }
 
-func (p *PrefixExpression) expressionNode() {}
+func (i *InfixExpression) expressionNode() {}

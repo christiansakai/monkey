@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"io"
 
+	"monkey/evaluator"
 	"monkey/lexer"
 	"monkey/parser"
-	"monkey/evaluator"
 )
 
 const PROMPT = ">> "
@@ -34,12 +34,12 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-    evaluated := evaluator.Eval(program)
+		evaluated := evaluator.Eval(program)
 
-    if evaluated != nil {
-      io.WriteString(out, evaluated.Inspect())
-      io.WriteString(out, "\n")
-    }
+		if evaluated != nil {
+			io.WriteString(out, evaluated.Inspect())
+			io.WriteString(out, "\n")
+		}
 	}
 }
 

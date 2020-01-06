@@ -481,38 +481,38 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 }
 
 func TestStringLiteralExpression(t *testing.T) {
-  input := `"hello world";`
+	input := `"hello world";`
 
-  l := lexer.New(input)
-  p := New(l)
+	l := lexer.New(input)
+	p := New(l)
 
-  program := p.ParseProgram()
+	program := p.ParseProgram()
 
-  checkParserErrors(t, p)
+	checkParserErrors(t, p)
 
-  if len(program.Statements) != 1 {
-    t.Fatalf(
-      "program has not enough statements. got = %d",
-      len(program.Statements),
-    )
-  }
+	if len(program.Statements) != 1 {
+		t.Fatalf(
+			"program has not enough statements. got = %d",
+			len(program.Statements),
+		)
+	}
 
-  stmt := program.Statements[0].(*ast.ExpressionStatement)
-  literal, ok := stmt.Expression.(*ast.StringLiteral)
-  if !ok {
-    t.Fatalf(
-      "exp not *ast.StringLiteral. got = %T",
-      stmt.Expression,
-    )
-  }
+	stmt := program.Statements[0].(*ast.ExpressionStatement)
+	literal, ok := stmt.Expression.(*ast.StringLiteral)
+	if !ok {
+		t.Fatalf(
+			"exp not *ast.StringLiteral. got = %T",
+			stmt.Expression,
+		)
+	}
 
-  if literal.Value != "hello world" {
-    t.Errorf(
-      "literal.Value not %q. got = %q",
-      "hello world",
-      literal.Value,
-    )
-  }
+	if literal.Value != "hello world" {
+		t.Errorf(
+			"literal.Value not %q. got = %q",
+			"hello world",
+			literal.Value,
+		)
+	}
 }
 
 func testInfixExpression(

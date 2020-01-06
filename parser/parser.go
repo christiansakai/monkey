@@ -420,10 +420,10 @@ func (p *Parser) parseCallArguments() []ast.Expression {
 }
 
 func (p *Parser) parseStringLiteral() ast.Expression {
-  return &ast.StringLiteral{
-    Token: p.currToken,
-    Value: p.currToken.Literal,
-  }
+	return &ast.StringLiteral{
+		Token: p.currToken,
+		Value: p.currToken.Literal,
+	}
 }
 
 func (p *Parser) currTokenIs(t token.TokenType) bool {

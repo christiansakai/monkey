@@ -332,3 +332,30 @@ func (s *StringLiteral) String() string {
 }
 
 func (s *StringLiteral) expressionNode() {}
+
+type ArrayLiteral struct {
+	Token    token.Token // The LBRACKET token
+	Elements []Expression
+}
+
+func (a *ArrayLiteral) TokenLiteral() string {
+	return a.Token.Literal
+}
+
+func (a *ArrayLiteral) String() string {
+	var out bytes.Buffer
+
+	elements := []string{}
+
+	for _, el := range a.Elements {
+		elements = append(elements, el.String())
+	}
+
+	out.WriteString("[")
+	out.WriteString(strings.Join(elements, ", "))
+	out.WriteString("]")
+
+	return out.String()
+}
+
+func (a *ArrayLiteral) expressionNode() {}

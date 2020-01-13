@@ -13,19 +13,19 @@ import (
 type ObjectType string
 
 const (
-	INTEGER_OBJ      = "INTEGER"
-	BOOLEAN_OBJ      = "BOOLEAN"
-	NULL_OBJ         = "NULL"
-	RETURN_VALUE_OBJ = "RETURN_VALUE"
-	ERROR_OBJ        = "ERROR"
-	FUNCTION_OBJ     = "FUNCTION"
-	STRING_OBJ       = "STRING"
-	BUILTIN_OBJ      = "BUILTIN"
-	ARRAY_OBJ        = "ARRAY"
-	HASH_OBJ         = "HASH"
-	QUOTE_OBJ        = "QUOTE"
-	MACRO_OBJ        = "MACRO"
-  COMPILED_FUNC_OBJ = "COMPILED_FUNC_OBJ"
+	INTEGER_OBJ       = "INTEGER"
+	BOOLEAN_OBJ       = "BOOLEAN"
+	NULL_OBJ          = "NULL"
+	RETURN_VALUE_OBJ  = "RETURN_VALUE"
+	ERROR_OBJ         = "ERROR"
+	FUNCTION_OBJ      = "FUNCTION"
+	STRING_OBJ        = "STRING"
+	BUILTIN_OBJ       = "BUILTIN"
+	ARRAY_OBJ         = "ARRAY"
+	HASH_OBJ          = "HASH"
+	QUOTE_OBJ         = "QUOTE"
+	MACRO_OBJ         = "MACRO"
+	COMPILED_FUNC_OBJ = "COMPILED_FUNC_OBJ"
 )
 
 type Object interface {
@@ -285,13 +285,13 @@ func (m *Macro) Inspect() string {
 }
 
 type CompiledFunction struct {
-  Instructions code.Instructions
+	Instructions code.Instructions
 }
 
 func (cf *CompiledFunction) Type() ObjectType {
-  return COMPILED_FUNC_OBJ
+	return COMPILED_FUNC_OBJ
 }
 
 func (cf *CompiledFunction) Inspect() string {
-  return fmt.Sprintf("CompiledFunction[%p]", cf)
+	return fmt.Sprintf("CompiledFunction[%p]", cf)
 }

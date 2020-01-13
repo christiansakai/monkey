@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"monkey/ast"
+	"monkey/code"
 )
 
 type ObjectType string
@@ -24,6 +25,7 @@ const (
 	HASH_OBJ         = "HASH"
 	QUOTE_OBJ        = "QUOTE"
 	MACRO_OBJ        = "MACRO"
+  COMPILED_FUNC_OBJ = "COMPILED_FUNC_OBJ"
 )
 
 type Object interface {
@@ -280,4 +282,16 @@ func (m *Macro) Inspect() string {
 	out.WriteString("\n}")
 
 	return out.String()
+}
+
+type CompiledFunction struct {
+  Instructions code.Instructions
+}
+
+func (cf *CompiledFunction) Type() ObjectType {
+  return COMPILED_FUNC_OBJ
+}
+
+func (cf *CompiledFunction) Inspect() string {
+  return fmt.Sprintf("CompiledFunction[%p]", cf)
 }

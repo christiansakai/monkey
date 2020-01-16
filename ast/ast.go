@@ -2,6 +2,7 @@ package ast
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 
 	"monkey/token"
@@ -260,6 +261,7 @@ func (b *BlockStatement) String() string {
 func (b *BlockStatement) statementNode() {}
 
 type FunctionLiteral struct {
+	Name       string
 	Token      token.Token // The FUNCTION token
 	Parameters []*Identifier
 	Body       *BlockStatement
@@ -279,6 +281,10 @@ func (f *FunctionLiteral) String() string {
 	}
 
 	out.WriteString(f.TokenLiteral())
+	if f.Name != "" {
+		out.WriteString(fmt.Sprintf("<%s>", f.Name))
+	}
+
 	out.WriteString("(")
 	out.WriteString(strings.Join(params, ", "))
 	out.WriteString(")")
